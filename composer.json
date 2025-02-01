@@ -1,0 +1,23 @@
+{
+  "name": "jengo/core",
+  "description": "This is a starter template for codeigniter4",
+  "type": "project",
+  "version": "0.1.0",
+  "autoload": {
+    "psr-4": {
+      "Jengo\\": "src/"
+    },
+    "exclude-from-classmap": [
+      "**/Database/Migrations/**"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Gilads Otiannoh"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "codeigniter4/framework": "^4.6"
+  }
+}
