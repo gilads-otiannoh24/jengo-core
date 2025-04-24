@@ -2,7 +2,6 @@
   "name": "jengo/core",
   "description": "This is a starter template for codeigniter4",
   "type": "project",
-  "version": "v1.0.1",
   "license": "MIT",
   "autoload": {
     "psr-4": {
