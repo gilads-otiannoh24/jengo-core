@@ -11,7 +11,7 @@ if (!function_exists("getFileVersion")) {
      */
     function getFileVersion(): string
     {
-        return "?v=" . (ENVIRONMENT === 'production' ? config("Jengo\Config\Jengo")->releaseVersion : time());
+        return "?v=" . (ENVIRONMENT === 'production' ? config("Jengo")->releaseVersion : time());
     }
 }
 
