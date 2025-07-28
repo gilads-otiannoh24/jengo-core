@@ -3,7 +3,7 @@
 namespace Jengo\Models;
 
 use CodeIgniter\Model as CI4Model;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 
 class Model extends CI4Model
 {
