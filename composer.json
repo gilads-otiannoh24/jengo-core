@@ -19,6 +19,7 @@
   ],
   "require": {
     "php": "^8.0",
-    "codeigniter4/framework": "^4.6"
+    "codeigniter4/framework": "^4.6",
+    "tightenco/collect": "^9.52"
   }
 }
