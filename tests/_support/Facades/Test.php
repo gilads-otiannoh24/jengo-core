@@ -2,10 +2,10 @@
 
 namespace Tests\Support\Facades;
 
-use Jengo\Core\Facades\Model;
+use Jengo\Core\Facades\ModelFacade;
 use Tests\Support\Models\TestModel;
 
-class Test extends Model
+class Test extends ModelFacade
 {
     protected static string $modelClass = TestModel::class;
 }

@@ -70,7 +70,7 @@ use CodeIgniter\Model as CI4Model;
  * @method static mixed with(string ...$associations)
  */
 
-class Model
+class ModelFacade
 {
     protected static string $modelClass;
 
