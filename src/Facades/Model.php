@@ -1,6 +1,6 @@
 <?php
 
-namespace Jengo\Facades;
+namespace Jengo\Core\Facades;
 
 use CodeIgniter\Model as CI4Model;
 
@@ -70,46 +70,44 @@ use CodeIgniter\Model as CI4Model;
  * @method static mixed with(string ...$associations)
  */
 
-
-class Model extends CI4Model
+class Model
 {
+    protected static string $modelClass;
+
+    protected static function instance(): CI4Model
+    {
+        return new static::$modelClass();
+    }
+
     public static function __callStatic($method, $args)
     {
-        $instance = new static();
+        $instance = static::instance();
 
-        $result = $instance->$method(...$args);
-
-        return $result;
-    }
-
-    /**
-     * @param array<bool|float|int|object|string|null>|object|null $row
-     * @param bool $returnID
-     */
-
-    public function insert($row = null, $returnID = true)
-    {
-        $id = parent::insert($row, $returnID);
-
-        if (parent::errors()) {
-            session()->setFlashdata("errors", parent::errors());
-        }
-
-        return $id;
-    }
-
-    /**
-     * @param array|int|string|null $id
-     * @param array<bool|float|int|object|string|null>|object|null $row
-     */
-    public function update($id = null, $row = null): bool
-    {
-        $return = parent::update($id, $row);
-
-        if (parent::errors()) {
-            session()->setFlashdata("errors", parent::errors());
-        }
-
-        return $return;
+        return $instance->$method(...$args);
     }
 }
+
+
+
+/* public function insert($row = null, $returnID = true)
+ {
+     $id = parent::insert($row, $returnID);
+
+     if ($errors = parent::errors()) {
+         session()->setFlashdata("errors", $errors);
+     }
+
+     return $id;
+ }
+
+ public function update($id = null, $row = null): bool
+ {
+     $result = parent::update($id, $row);
+
+     if ($errors = parent::errors()) {
+         session()->setFlashdata("errors", $errors);
+     }
+
+     return $result;
+ }
+     */

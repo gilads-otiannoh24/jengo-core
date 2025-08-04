@@ -1,6 +1,6 @@
 <?php
 
-namespace Jengo\Config;
+namespace Jengo\Core\Config;
 
 use CodeIgniter\Config\BaseConfig;
 

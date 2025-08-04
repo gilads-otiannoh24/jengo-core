@@ -2,24 +2,48 @@
   "name": "jengo/core",
   "description": "This is a starter template for codeigniter4",
   "type": "project",
-  "version": "v1.0.9",
+  "version": "v1.0.10",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Jengo\\": "src/"
+      "Jengo\\Core\\": "src/"
     },
     "exclude-from-classmap": [
       "**/Database/Migrations/**"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Support\\": "tests/_support",
+      "Tests\\": "tests/"
+    }
+  },
   "authors": [
     {
-      "name": "Gilads Otiannoh"
+      "name": "Ian Otieno Ochieng",
+      "email": "ochiengian383@gmail.com",
+      "role": "Developer"
     }
   ],
   "require": {
     "php": "^8.0",
     "codeigniter4/framework": "^4.6",
-    "illuminate/collections": "^12.21"
+    "illuminate/collections": "^12.21",
+    "fakerphp/faker": "^1.24",
+    "mikey179/vfsstream": "^1.6"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "pestphp/pest": "^3.8"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "scripts": {
+    "test": "pest",
+    "spark": "php vendor/codeigniter4/framework/spark"
   }
 }

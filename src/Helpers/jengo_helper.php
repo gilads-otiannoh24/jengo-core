@@ -29,3 +29,41 @@ if (!function_exists('page')) {
         return view("pages/$name", $data, $options);
     }
 }
+
+/**
+ * Encrypts an id using the provided key
+ *
+ * @param int|string $id Id to be encrypted
+ *
+ * @return string
+ */
+function encrypt(int|string $id): string
+{
+    $encrypter = service('encrypter');
+    $encryptedId = $encrypter->encrypt("$id", ['key' => getenv('encryption.key')]);
+
+    $urlSafeencryptedId = base64_encode($encryptedId);
+
+    return str_replace(['/', '+', '='], ['-', '_', ''], $urlSafeencryptedId);
+}
+
+/**
+ * Decrypts an encrypted id string from the encryptId function
+ *
+ * @param string $encryptedId Encrypted id string
+ *
+ * @return string
+ */
+function decrypt(string $encryptedId): string|int
+{
+    $encrypter = service('encrypter');
+    // Add padding back if missing
+    $padding = strlen($encryptedId) % 4;
+    if ($padding > 0) {
+        $encryptedId .= str_repeat('=', 4 - $padding);
+    }
+
+    $decryptedId = $encrypter->decrypt(base64_decode(str_replace(['-', '_'], ['/', '+'], $encryptedId)), ['key' => getenv('encryption.key')]);
+
+    return $decryptedId;
+}

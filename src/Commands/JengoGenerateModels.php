@@ -1,14 +1,14 @@
 <?php
 
-namespace Jengo\Commands;
+namespace Jengo\Core\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 class JengoGenerateModels extends BaseCommand
 {
-    protected $group       = 'Jengo';
-    protected $name        = 'generate:models';
+    protected $group = 'Jengo';
+    protected $name = 'generate:models';
     protected $description = 'Scan migrations and generate models for tables created by them.';
 
     public function run(array $params)

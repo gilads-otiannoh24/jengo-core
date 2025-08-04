@@ -1,6 +1,6 @@
 <?php
 
-namespace Jengo\Commands;
+namespace Jengo\Core\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
@@ -65,7 +65,7 @@ class JengoMakeRepositoryCommand extends BaseCommand
         }
 
         $serviceName = ucfirst($name);
-        $filePath    = APPPATH . "Repositories/{$serviceName}.php";
+        $filePath = APPPATH . "Repositories/{$serviceName}.php";
 
         if (file_exists($filePath)) {
             CLI::error("The service {$serviceName} already exists.");

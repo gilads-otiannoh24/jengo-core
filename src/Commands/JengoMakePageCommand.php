@@ -1,6 +1,6 @@
 <?php
 
-namespace Jengo\Commands;
+namespace Jengo\Core\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
@@ -8,21 +8,21 @@ use CodeIgniter\CLI\CLI;
 class JengoMakePageCommand extends BaseCommand
 {
 
-    protected $group       = 'Jengo';
-    protected $name        = 'make:page';
+    protected $group = 'Jengo';
+    protected $name = 'make:page';
     protected $description = 'Creates a new page in the Views/pages directory and optionally a layout in the Views/layouts directory.';
 
     protected $usage = 'make:page [pagename] [layout]';
     protected $arguments = [
         'pagename' => 'The name of the page to create. Can include subdirectories like admin/pagename.',
-        'layout'   => '(Optional) The name of the layout to use. If it does not exist, it will be created.'
+        'layout' => '(Optional) The name of the layout to use. If it does not exist, it will be created.'
     ];
 
     public function run(array $params)
     {
         $validation = \Config\Services::validation();
         $pagename = $params[0] ?? null;
-        $layout   = $params[1] ?? null;
+        $layout = $params[1] ?? null;
 
         $validation->setRules(config('Jengo\Config\Jengo')->validationRules['file_name']);
 

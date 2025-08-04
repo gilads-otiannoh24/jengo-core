@@ -1,6 +1,6 @@
 <?php
 
-namespace Jengo\Repositories;
+namespace Jengo\Core\Repositories;
 
 class UserRepository
 {

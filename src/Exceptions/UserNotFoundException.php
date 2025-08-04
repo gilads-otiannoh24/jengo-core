@@ -1,6 +1,6 @@
-<?php 
- 
-namespace Jengo\Exceptions;
+<?php
+
+namespace Jengo\Core\Exceptions;
 
 use Exception;
 use Throwable;

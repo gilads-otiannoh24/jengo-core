@@ -1,8 +1,9 @@
 <?php
 
-namespace Jengo\Facades;
+namespace Jengo\Core\Facades;
 
 use CodeIgniter\HTTP\Response;
+use Jengo\Core\Exceptions\InterruptExecutionException;
 
 /**
  * Class Request
@@ -67,7 +68,24 @@ class Request
         return request()->$method(...$args);
     }
 
-    public static function validate(array $rules): bool|Response
+    /**
+     * Validates incoming request data against the provided validation rules.
+     *
+     * Automatically pulls JSON or POST data depending on the request content type.
+     * If validation fails, throws an InterruptExecutionException with a redirect
+     * response back to the previous page, attaching validation errors to the session.
+     *
+     * @param array $rules Validation rules in the format accepted by CodeIgniter's validator.
+     * @param bool $redirect Flag whether to perform a redirect after validation fails.
+     *
+     * @throws \Jengo\Core\Exceptions\InterruptExecutionException If validation fails and redirect is permitted.
+     *
+     * @return bool|array
+     *         Returns true if validation passes.
+     *         If an InterruptExecutionException is thrown, execution is halted.
+     *         If validation fails, returns an array of validation errors depeding on redirect flag.
+     */
+    public static function validate(array $rules, bool $redirect = true): bool|array
     {
         /** @var \CodeIgniter\Validation\ValidationInterface */
         $validator = service("validation");
@@ -83,13 +101,27 @@ class Request
 
         $success = $validator->run($data);
 
-        if (!$success) {
-            return redirect()
+        if (!$success && $redirect) {
+            throw new InterruptExecutionException(redirect()
                 ->back()
-                ->with("errors", $validator->getErrors())
-                ->send();
+                ->with("errors", $validator->getErrors()));
+        } else if (!$success) {
+            return $validator->getErrors();
         }
 
         return $success;
+    }
+
+    /**
+     * Retrieves a single input value from the current request, supporting all input types
+     * (GET, POST, JSON, etc.).
+     *
+     * @param string $key The input key to retrieve.
+     *
+     * @return mixed The value associated with the input key, or null if not found.
+     */
+    public static function input(string $key)
+    {
+        return request()->getVar($key);
     }
 }

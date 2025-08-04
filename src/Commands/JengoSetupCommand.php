@@ -1,14 +1,14 @@
 <?php
 
-namespace Jengo\Commands;
+namespace Jengo\Core\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 class JengoSetupCommand extends BaseCommand
 {
-    protected $group       = 'Jengo';
-    protected $name        = 'jengo:setup';
+    protected $group = 'Jengo';
+    protected $name = 'jengo:setup';
     protected $description = 'Sets ups jengo initials user files.';
     private array $userPrefences = [];
 
